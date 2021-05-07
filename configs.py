@@ -10,7 +10,7 @@ onto a simulation field.
 import numpy as np
 
 
-def insert_pattern(base, pattern, offset=None):
+def insert_pattern(base, pattern, offset=None): #optional!
     """
     Takes a base simulation field and places a given pattern with an offset
     onto it. When offset is None, the object is placed into the middle
@@ -34,8 +34,17 @@ def insert_pattern(base, pattern, offset=None):
     field : TYPE
         The simulation field with the pattern placed.
     """
-    pass
+    #pass
+    pattern = np.array(pattern)
+    new_field_config = base
+    if offset == None:
+        offset = (0,0)
+    #neue pos mit offset
+    pos = (np.int(new_field_config.shape[0] / 2) + offset[0], np.int(new_field_config.shape[1] / 2 + offset[1]))
+    #überschreibe new_field_coinfig mit pattern an gewünschter pos
+    new_field_config[pos[0]:pos[0] + pattern.shape[0], pos[1]:pos[1] + pattern.shape[1]] = pattern
 
+    return new_field_config
 
 BLINKER = [[1, 1, 1]]
 
@@ -59,3 +68,5 @@ GOSPER = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
+
+FULLARAY = np.ones((99,16), dtype=int)
